@@ -10,7 +10,13 @@ canoy = 250
 
 rodando = True
 time = pygame.time.Clock()
+
+cano = pygame.transform.scale(pygame.image.load("assets/cano.png").convert_alpha(), (50, 450))
+fundo = pygame.transform.scale(pygame.image.load("assets/fundo.png").convert_alpha(), (500,500))
+img_player = pygame.transform.scale(pygame.image.load("assets/bird.png").convert_alpha(), (50, 50)) 
+
 while rodando:
+    img_player_rotate = pygame.transform.rotate(img_player, velocidade/275*45*-1)
     #multiplique x por delta para fazer andar x pixels por segundo
     delta = time.tick(60) / 1000
     for evento in pygame.event.get():
@@ -18,19 +24,20 @@ while rodando:
             rodando = False
         if evento.type == pygame.KEYDOWN:
             if evento.key == pygame.K_SPACE:
-                velocidade = -250
+                velocidade = -275
     if canox < -50:
         canox = 500
         canoy = random.randint(100, 400)
 
-    tela.fill((200, 200, 255))
-    velocidade += 350 * delta
+    tela.blit(fundo, (0, 0))
+    velocidade += 400 * delta
     y += velocidade * delta
     canox -= 250 * delta
 
+    
     pygame.draw.rect(tela, (0, 255, 0), (canox, canoy - 525, 50, 450))
     pygame.draw.rect(tela, (0, 255, 0), (canox, canoy + 75, 50, 450))
-    pygame.draw.rect(tela, (255, 255, 0), (100, y, 50, 50)) 
+    tela.blit(img_player_rotate, (100, y)) 
 
 
     pygame.display.flip()
