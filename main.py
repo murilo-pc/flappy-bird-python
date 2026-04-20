@@ -34,9 +34,8 @@ while rodando:
     y += velocidade * delta
     canox -= 250 * delta
 
-    
-    pygame.draw.rect(tela, (0, 255, 0), (canox, canoy - 525, 50, 450))
-    pygame.draw.rect(tela, (0, 255, 0), (canox, canoy + 75, 50, 450))
+    tela.blit(cano, (canox, canoy + 75))
+    tela.blit(pygame.transform.rotate(cano, 180), (canox, canoy - 525)) 
     tela.blit(img_player_rotate, (100, y)) 
 
 
